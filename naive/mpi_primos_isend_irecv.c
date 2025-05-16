@@ -38,52 +38,10 @@ int main(int argc, char *argv[]) {
 
     if (num_procs > 1) {
         if (meu_ranque != 0) {
-            
-
-            // 1. MPI_Send
-			/*
-            MPI_Send(&cont, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
-			*/
-            // 2. MPI_Isend
-            /*
             MPI_Request request;
             MPI_Isend(&cont, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, &request);
             MPI_Wait(&request, &status);
-            */
-
-            // 3. MPI_Rsend
-            /*
-            MPI_Rsend(&cont, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
-            */
-
-            // 4. MPI_Bsend
-            /*
-            int buffer_size = MPI_BSEND_OVERHEAD + sizeof(int);
-            char *buffer = (char *)malloc(buffer_size);
-            MPI_Buffer_attach(buffer, buffer_size);
-            MPI_Bsend(&cont, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
-            MPI_Buffer_detach(&buffer, &buffer_size);
-            free(buffer);
-            */
-
-            // 5. MPI_Ssend
-            
-            MPI_Ssend(&cont, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
-            
         } else {
-           
-
-           //MPI_Recv 
-			/*
-            total = cont; 
-            int received_cont;
-            for (int j = 1; j < num_procs; j++) {
-                MPI_Recv(&received_cont, 1, MPI_INT, j, 0, MPI_COMM_WORLD, &status);
-                total += received_cont;
-            }
-			*/
-            //MPI_Irecv
-            
             total = cont; 
             int received_cont[num_procs - 1];
             MPI_Request requests[num_procs - 1];
@@ -93,9 +51,7 @@ int main(int argc, char *argv[]) {
             for (int j = 0; j < num_procs - 1; j++) {
                 MPI_Wait(&requests[j], &status);
                 total += received_cont[j];
-				printf("teste5\n");
             }
-            
         }
     } else {
         total = cont;
