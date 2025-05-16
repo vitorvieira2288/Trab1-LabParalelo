@@ -17,8 +17,8 @@ int main(int argc, char *argv[]) { /* mpi_primosbag.c */
     int cont = 0, total = 0;
     int i, n;
     int meu_ranque, num_procs, inicio, dest, raiz = 0, tag = 1, stop = 0;
-    MPI_Status estado;   /* Status para MPI_Irecv */
-    MPI_Request request; /* Request para MPI_Irecv */
+    MPI_Status estado;   
+    MPI_Request request; 
     
     /* Verifica o número de argumentos passados */
     if (argc < 2) {
