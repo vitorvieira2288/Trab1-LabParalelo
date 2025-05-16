@@ -26,11 +26,11 @@ if __name__ == "__main__":
 
     #Execute with 2, 4 and 8 processes
 
-    r1_mean = run_sequential.get_mean(exec_number, args=[1000000])
+    r1_mean = run_sequential.get_mean(exec_number, args=[10000000])
 
-    r2 = run_primos.run_all(num_procs=2, exec_number=exec_number, args=['1000000'])
-    r4 = run_primos.run_all(num_procs=4, exec_number=exec_number, args=['1000000'])
-    r8 = run_primos.run_all(num_procs=8, exec_number=exec_number, args=['1000000'])
+    r2 = run_primos.run_all(num_procs=2, exec_number=exec_number, args=['10000000'])
+    r4 = run_primos.run_all(num_procs=4, exec_number=exec_number, args=['10000000'])
+    r8 = run_primos.run_all(num_procs=8, exec_number=exec_number, args=['10000000'])
 
     names = file_manager.list_files(show_path=True)
     for name in names:
@@ -38,10 +38,10 @@ if __name__ == "__main__":
         efficiency_2_procs  =speed_up_2_procs/2
 
         speed_up_4_procs = r1_mean / r4[name]
-        efficiency_4_procs  =speed_up_4_procs/2
+        efficiency_4_procs  =speed_up_4_procs/4
 
         speed_up_8_procs = r1_mean / r8[name]
-        efficiency_8_procs  =speed_up_8_procs/2
+        efficiency_8_procs  =speed_up_8_procs/8
 
         content = [
             f"Speed-Up com 2 processos: {speed_up_2_procs}",
