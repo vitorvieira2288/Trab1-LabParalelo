@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 
     if (num_procs > 1) {
         if (meu_ranque != 0) {
-            // Escolha uma função de envio para cada execução:
+            
 
             // 1. MPI_Send
 			/*
@@ -71,20 +71,20 @@ int main(int argc, char *argv[]) {
             MPI_Ssend(&cont, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
             
         } else {
-            // Ranque 0: escolha uma função de recebimento
+           
 
-            // Opção 1: MPI_Recv (bloqueante)
+           //MPI_Recv 
 			/*
-            total = cont; // Inclui a contagem local do ranque 0
+            total = cont; 
             int received_cont;
             for (int j = 1; j < num_procs; j++) {
                 MPI_Recv(&received_cont, 1, MPI_INT, j, 0, MPI_COMM_WORLD, &status);
                 total += received_cont;
             }
 			*/
-            // Opção 2: MPI_Irecv (não bloqueante)
+            //MPI_Irecv
             
-            total = cont; // Inclui a contagem local do ranque 0
+            total = cont; 
             int received_cont[num_procs - 1];
             MPI_Request requests[num_procs - 1];
             for (int j = 1; j < num_procs; j++) {
