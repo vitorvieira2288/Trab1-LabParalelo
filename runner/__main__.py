@@ -23,7 +23,12 @@ if __name__ == "__main__":
     file_manager = FileManager(folder)
 
     #Execute with 1, 2 and 4 processes
-    r1 = run_primos.run_all(num_procs=1, exec_number=exec_number, args=['1000000'])
+    if folder == "bag_of_tasks":
+        run_primos_1 = RunMPIPrimos("naive")
+        r1 = run_primos_1.run_all(num_procs=1, exec_number=exec_number, args=['1000000'])
+    else:
+        r1 = run_primos.run_all(num_procs=1, exec_number=exec_number, args=['1000000'])
+
     r2 = run_primos.run_all(num_procs=2, exec_number=exec_number, args=['1000000'])
     r4 = run_primos.run_all(num_procs=4, exec_number=exec_number, args=['1000000'])
 
