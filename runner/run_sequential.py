@@ -58,7 +58,7 @@ class RunSequential:
         command = [self.__path]
         
         if args:
-            command.extend(args)
+            command.extend(str(arg) for arg in args)
 
         try:
             result = subprocess.run(
@@ -105,7 +105,7 @@ class RunSequential:
 
         fm = FileManager("sequential")
         fm.write_generator("relatorio/sequential/primos.txt", content)
-
+        return mean
 
 if __name__ == "__main__":
     run = RunSequential("./sequential/primos.c")
